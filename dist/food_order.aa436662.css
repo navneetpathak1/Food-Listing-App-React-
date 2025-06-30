@@ -231,4 +231,106 @@ body {
     padding: 1rem;
   }
 }
+
+.shimmer-container {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  display: grid;
+}
+
+.shimmer-card {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 1rem;
+  animation: 1.5s ease-in-out infinite pulse;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f6f6f6 50%, #e0e0e0 75%) 0 0 / 200% 100%;
+  border-radius: 8px;
+  animation: 1.5s infinite shimmer;
+}
+
+.shimmer-img {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 1rem;
+}
+
+.shimmer-title {
+  width: 60%;
+  height: 20px;
+  margin-bottom: .5rem;
+}
+
+.shimmer-text {
+  width: 80%;
+  height: 14px;
+  margin-bottom: .4rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.restaurant-container {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: Arial, sans-serif;
+}
+
+.restaurant-title {
+  color: #333;
+  margin-bottom: .5rem;
+  font-size: 2rem;
+}
+
+.restaurant-cuisines, .restaurant-price {
+  color: #555;
+  margin: .25rem 0;
+}
+
+.menu-heading {
+  color: #222;
+  border-bottom: 1px solid #ccc;
+  margin-top: 1.5rem;
+  padding-bottom: .25rem;
+  font-size: 1.5rem;
+}
+
+.menu-list {
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-item {
+  border-bottom: 1px solid #eee;
+  justify-content: space-between;
+  padding: .5rem 0;
+  display: flex;
+}
+
+.menu-price {
+  color: #333;
+  font-weight: bold;
+}
+
+.not-found {
+  text-align: center;
+  color: red;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+}
 /*# sourceMappingURL=food_order.aa436662.css.map */
