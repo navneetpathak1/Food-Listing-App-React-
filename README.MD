@@ -3,7 +3,7 @@ The app displays restaurants as cards and allows users to click and view dynamic
 
 ---
 
-## ✨ Features
+## Features
 
 ✅ Single Page Application using React  
 ✅ Dynamic routing with React Router DOM  
