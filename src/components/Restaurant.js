@@ -1,11 +1,18 @@
 import { useParams } from "react-router-dom";
 import { restaurantData } from "./menuData";
 import "../../index.css"
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Restaurant = () => {
   const { restId } = useParams();
 
   const restaurant = restaurantData.restaurants.find((r) => r.id === restId);
+
+  const isOnline = useOnlineStatus();
+
+  if(isOnline === false) {
+    return <p className="not-found"> Please check your internet connection </p>
+  }
 
   if (!restaurant) {
     return <p className="not-found">Restaurant not found.</p>;
