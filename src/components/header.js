@@ -26,6 +26,7 @@ export const Header = () => {
         <li className="nav-item"> <Link to="/about">Details</Link> </li>
         <li className="nav-item"> <Link to="/contact">Contact Us</Link> </li>
         <li className="nav-item"> <Link to="/card">Card</Link> </li>
+        <li className="nav-item"> <Link to="/another">Another Store</Link> </li>
         <button className="nav-item" onClick={()=>{
           logState === "Login"? setLogState("Logout"): setLogState("Login")
         }}>{logState}</button>
