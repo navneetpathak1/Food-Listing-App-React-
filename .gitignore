@@ -1,3 +1,12 @@
-node_modules
-dist
-.parcel-cache
+# Node dependencies
+node_modules/
+
+# Parcel build output
+dist/
+
+# Parcel cache
+.parcel-cache/
+
+# Optional: OS junk
+.DS_Store
+Thumbs.db
