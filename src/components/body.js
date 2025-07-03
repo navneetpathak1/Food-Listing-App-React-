@@ -6,17 +6,18 @@ import { Link } from "react-router-dom";
 // SearchBar Component
 const SearchBar = ({ searchTab, setSearchTab, handleSearch }) => {
   return (
-    <div>
+    <div className="flex items-center justify-center gap-4 my-8">
       <input
         type="text"
-        className="search-input"
+        className="w-64 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="Search restaurants..."
         value={searchTab}
-        onChange={(e) => 
-          setSearchTab(e.target.value)
-        }
+        onChange={(e) => setSearchTab(e.target.value)}
       />
-      <button className="search-btn" onClick={handleSearch}>
+      <button
+        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+        onClick={handleSearch}
+      >
         Search
       </button>
     </div>
@@ -26,11 +27,15 @@ const SearchBar = ({ searchTab, setSearchTab, handleSearch }) => {
 // Restaurant Card Component
 const RestaurantComponent = ({ name, cuisines, imageId, lastMileMin }) => {
   return (
-    <div className="restaurant-card">
-      <img src={imageId} alt={name} className="restaurant-image" />
-      <h2 className="restaurant-name">{name}</h2>
-      <h3 className="restaurant-cuisines">{cuisines.join(", ")}</h3>
-      <h3 className="restaurant-time">{lastMileMin} mins</h3>
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4">
+      <img
+        src={imageId}
+        alt={name}
+        className="w-full h-48 object-cover rounded-md"
+      />
+      <h2 className="mt-4 text-xl font-semibold text-gray-800">{name}</h2>
+      <h3 className="text-gray-600">{cuisines.join(", ")}</h3>
+      <h3 className="text-gray-500">{lastMileMin} mins</h3>
     </div>
   );
 };
@@ -47,7 +52,7 @@ export const Body = () => {
     setRestaurants(filtered);
   };
 
-  return restaurants.length === 0? (
+  return restaurants.length === 0 ? (
     <ShimmerUI />
   ) : (
     <>
@@ -57,16 +62,20 @@ export const Body = () => {
         handleSearch={handleSearch}
       />
 
-      <div className="body">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 pb-10">
         {restaurants.length > 0 ? (
           restaurants.map((restaurant) => (
-            <Link to={"/restaurant/"+restaurant.data.id} key={restaurant.data.id}><RestaurantComponent
-              {...restaurant.data}
-            
-            /></Link>
+            <Link
+              to={"/restaurant/" + restaurant.data.id}
+              key={restaurant.data.id}
+            >
+              <RestaurantComponent {...restaurant.data} />
+            </Link>
           ))
         ) : (
-          <p>No restaurants found.</p>
+          <p className="col-span-full text-center text-gray-500">
+            No restaurants found.
+          </p>
         )}
       </div>
     </>

@@ -20,7 +20,10 @@ const Page = () => {
   return (
     <div className="page">
       <Header />
-      <Outlet></Outlet>
+      <main className="flex-grow container mx-auto px-4 pb-20 pt-8">
+        <Outlet />
+      </main>
+
       <Footer />
     </div>
   );
