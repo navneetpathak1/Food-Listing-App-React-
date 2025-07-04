@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
 import { restaurantData } from "./menuData";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useState } from "react";
+import Menu from "./Menu";
 
 const Restaurant = () => {
   const { restId } = useParams();
   const restaurant = restaurantData.restaurants.find((r) => r.id === restId);
+  const [openCategories, setOpenCategories] = useState({});
   const isOnline = useOnlineStatus();
 
   if (isOnline === false) {
@@ -42,17 +45,27 @@ const Restaurant = () => {
       </p>
 
       <h2 className="text-2xl font-semibold text-gray-700 mb-3">Menu</h2>
-      <ul className="divide-y divide-gray-200">
-        {restaurant.menuItems.map((item, index) => (
-          <li
-            key={index}
-            className="flex justify-between py-2 text-gray-700 hover:bg-gray-50 rounded"
+
+      {Object.keys(restaurant.menuItems).map((category) => (
+        <div key={category} className="mb-2">
+          <div
+            className="flex items-center justify-between text-gray-700 capitalize py-2 border-b border-gray-300 cursor-pointer"
+            onClick={() => {
+              setOpenCategories((prev) => ({
+                ...prev,
+                [category]: !prev[category],
+              }));
+            }}
           >
-            <span>{item.name}</span>
-            <span className="font-medium text-gray-900">{item.price}</span>
-          </li>
-        ))}
-      </ul>
+            <span className=" text-2xl">{category} ({(category.length )})</span>
+            <span>{openCategories[category] ? "⬆️" : "⬇️"}</span>
+          </div>
+
+          {openCategories[category] && (
+            <Menu data={restaurant.menuItems[category]} />
+          )}
+        </div>
+      ))}
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { restaurantList } from "../constant";
 import ShimmerUI from "./Shimmer";
 import { Link } from "react-router-dom";
+// import { WithPromoted } from "./Restaurant";`
 
 // SearchBar Component
 const SearchBar = ({ searchTab, setSearchTab, handleSearch }) => {
@@ -24,6 +25,22 @@ const SearchBar = ({ searchTab, setSearchTab, handleSearch }) => {
   );
 };
 
+export const WithPromoted = (RestaurantComponent) => {
+  return (props) => {
+    return (
+      <div className="relative">
+        <label
+          className="absolute top-2 left-2 bg-yellow-400 text-xs text-black font-semibold px-2 py-1 rounded shadow"
+        >
+          PROMOTED
+        </label>
+        <RestaurantComponent {...props} />
+      </div>
+    );
+  };
+};
+
+
 // Restaurant Card Component
 const RestaurantComponent = ({ name, cuisines, imageId, lastMileMin }) => {
   return (
@@ -45,6 +62,9 @@ export const Body = () => {
   const [searchTab, setSearchTab] = useState("");
   const [restaurants, setRestaurants] = useState(restaurantList);
 
+  // Create the HOC component
+  const PromotedRestaurantCard = WithPromoted(RestaurantComponent);
+
   const handleSearch = () => {
     const filtered = restaurantList.filter((res) =>
       res.data.name.toLowerCase().includes(searchTab.toLowerCase())
@@ -64,14 +84,23 @@ export const Body = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 pb-10">
         {restaurants.length > 0 ? (
-          restaurants.map((restaurant) => (
-            <Link
-              to={"/restaurant/" + restaurant.data.id}
-              key={restaurant.data.id}
-            >
-              <RestaurantComponent {...restaurant.data} />
-            </Link>
-          ))
+          restaurants.map((restaurant) => {
+            // For example, decide whether a restaurant is promoted
+            const isPromoted = restaurant.data.promoted;
+
+            const CardComponent = isPromoted
+              ? PromotedRestaurantCard
+              : RestaurantComponent;
+
+            return (
+              <Link
+                to={"/restaurant/" + restaurant.data.id}
+                key={restaurant.data.id}
+              >
+                <CardComponent {...restaurant.data} />
+              </Link>
+            );
+          })
         ) : (
           <p className="col-span-full text-center text-gray-500">
             No restaurants found.
