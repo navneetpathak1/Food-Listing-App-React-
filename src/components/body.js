@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { restaurantList } from "../constant";
 import ShimmerUI from "./Shimmer";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 // import { WithPromoted } from "./Restaurant";`
 
 // SearchBar Component
@@ -61,6 +62,7 @@ const RestaurantComponent = ({ name, cuisines, imageId, lastMileMin }) => {
 export const Body = () => {
   const [searchTab, setSearchTab] = useState("");
   const [restaurants, setRestaurants] = useState(restaurantList);
+  const {loggedInUser, setUserName} = useContext(UserContext)
 
   // Create the HOC component
   const PromotedRestaurantCard = WithPromoted(RestaurantComponent);
@@ -81,6 +83,19 @@ export const Body = () => {
         setSearchTab={setSearchTab}
         handleSearch={handleSearch}
       />
+
+      <div className="relative my-6 flex items-center gap-3">
+        <label className="text-sm font-medium text-gray-700">Set User Name:</label>
+        <input
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm w-64"
+          value={loggedInUser}
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+          placeholder="Enter your name"
+        />
+      </div>
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 pb-10">
         {restaurants.length > 0 ? (

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "../index.css" 
 import { Header } from "./components/header";
@@ -12,12 +12,25 @@ import Card from "./components/Card";
 import Restaurant from "./components/Restaurant";
 // import AnotherStore from "./components/AnotherStore";
 import ShimmerUI from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
 
 
 const AnotherStore = lazy(() => import("./components/AnotherStore"));
 
 const Page = () => {
+
+
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const data = {
+      name: "N P"
+    }
+
+    setUserName(data.name);
+  },[])
   return (
+     <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
     <div className="page">
       <Header />
       <main className="flex-grow container mx-auto px-4 pb-20 pt-8">
@@ -26,6 +39,7 @@ const Page = () => {
 
       <Footer />
     </div>
+    </UserContext.Provider>
   );
 };
 

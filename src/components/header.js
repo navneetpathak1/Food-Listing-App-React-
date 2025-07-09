@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LogoURL } from "../constant";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import UserContext from "../utils/UserContext.js";
 
 export const Header = () => {
   const [logState, setLogState] = useState("Login");
   const isOnline = useOnlineStatus();
+
+  const {loggedInUser} = useContext(UserContext);
 
   return (
     <div className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 shadow-lg">
@@ -56,6 +59,7 @@ export const Header = () => {
             {logState}
           </button>
         </li>
+        <li>{loggedInUser}</li>
       </ul>
     </div>
   );
