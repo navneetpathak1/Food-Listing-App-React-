@@ -13,7 +13,8 @@ import Restaurant from "./components/Restaurant";
 // import AnotherStore from "./components/AnotherStore";
 import ShimmerUI from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
-
+import {Provider} from "react-redux"
+import appStore from "./utils/appStore";
 
 const AnotherStore = lazy(() => import("./components/AnotherStore"));
 
@@ -30,7 +31,8 @@ const Page = () => {
     setUserName(data.name);
   },[])
   return (
-     <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
+    <Provider store={appStore} >
+    <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
     <div className="page">
       <Header />
       <main className="flex-grow container mx-auto px-4 pb-20 pt-8">
@@ -40,6 +42,7 @@ const Page = () => {
       <Footer />
     </div>
     </UserContext.Provider>
+    </Provider>
   );
 };
 

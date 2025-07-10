@@ -1,12 +1,16 @@
 import { useContext, useState } from "react";
-import { LogoURL } from "../constant";
+import { LogoURL } from "../constant.js";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
 import UserContext from "../utils/UserContext.js";
+import {useSelector} from "react-redux"
+
 
 export const Header = () => {
   const [logState, setLogState] = useState("Login");
   const isOnline = useOnlineStatus();
+
+  const cardItem = useSelector((store) => store.card.items)
 
   const {loggedInUser} = useContext(UserContext);
 
@@ -41,7 +45,7 @@ export const Header = () => {
         </li>
         <li>
           <Link to="/card" className="hover:text-yellow-300 transition-colors">
-            Card
+            Card ({cardItem.length})
           </Link>
         </li>
         <li>

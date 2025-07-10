@@ -64,6 +64,7 @@ const Restaurant = () => {
           {openCategories[category] && (
             <Menu data={restaurant.menuItems[category]} />
           )}
+
         </div>
       ))}
     </div>
