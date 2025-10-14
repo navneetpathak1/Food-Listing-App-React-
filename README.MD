@@ -3,6 +3,10 @@
 A **fully tested**, **production-ready** Single Page Application (SPA) built using **React**, **React Router DOM**, **Redux Toolkit**, and more. Inspired by Swiggy, this app follows the **DRY principle** and modern frontend best practices.
 
 ---
+## 🚀 Live Demo
+👉 **[View Live Here](https://foodvill.netlify.app/)**
+
+---
 
 ## Features
 
